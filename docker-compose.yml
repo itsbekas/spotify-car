@@ -1,0 +1,12 @@
+services:
+  spotify-car:
+    build: .
+    environment:
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+      - SPOTIFY_REDIRECT_URI=${SPOTIFY_REDIRECT_URI}
+      - GIN_MODE=release
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
