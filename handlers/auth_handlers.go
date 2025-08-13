@@ -16,7 +16,7 @@ type AuthHandler struct {
 	Spotify *spotify.Client
 }
 
-func (h *AuthHandler) StartAuth(c *gin.Context) {
+func (h *AuthHandler) RegisterClient(c *gin.Context) {
 	picoID := c.Query("pico_id")
 	sessionHash := c.Query("session_hash")
 
@@ -26,6 +26,15 @@ func (h *AuthHandler) StartAuth(c *gin.Context) {
 	}
 
 	h.Store.SetInitialData(picoID, sessionHash)
+}
+
+func (h *AuthHandler) StartAuth(c *gin.Context) {
+	picoID := c.Query("pico_id")
+
+	if picoID == "" {
+		c.String(http.StatusBadRequest, "Missing pico_id")
+		return
+	}
 
 	spotifyAuthURL := "https://accounts.spotify.com/authorize"
 	params := url.Values{}
@@ -60,7 +69,7 @@ func (h *AuthHandler) HandleCallback(c *gin.Context) {
 }
 
 func (h *AuthHandler) GetToken(c *gin.Context) {
-	picoID := c.Param("picoID")
+	picoID := c.Query("picoID")
 	sessionHash := c.Query("session_hash")
 
 	accessToken, refreshToken, found := h.Store.GetTokens(picoID, sessionHash)

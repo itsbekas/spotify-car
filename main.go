@@ -30,9 +30,10 @@ func main() {
 
 	router := gin.Default()
 
+	router.POST("/register", authHandler.RegisterClient)
 	router.GET("/auth", authHandler.StartAuth)
 	router.GET("/callback", authHandler.HandleCallback)
-	router.GET("/token/:picoID", authHandler.GetToken)
+	router.GET("/token", authHandler.GetToken)
 
 	router.Run(":8080")
 }

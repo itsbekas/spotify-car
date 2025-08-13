@@ -6,11 +6,11 @@ import (
 )
 
 type SessionData struct {
-	SessionHash  string
-	AccessToken  string
-	RefreshToken string
-	Expiration   time.Time // The token's expiry time
-	CreatedAt    time.Time // The token's created, used to clean old tokens
+	SessionHash		string
+	AccessToken		string
+	RefreshToken	string
+	Expiration		time.Time // The token's expiry time
+	CreatedAt		time.Time // The token's created, used to clean old tokens
 }
 
 type SessionStore struct {
