@@ -69,7 +69,7 @@ func (h *AuthHandler) HandleCallback(c *gin.Context) {
 }
 
 func (h *AuthHandler) GetToken(c *gin.Context) {
-	picoID := c.Query("picoID")
+	picoID := c.Query("pico_id")
 	sessionHash := c.Query("session_hash")
 
 	accessToken, refreshToken, found := h.Store.GetTokens(picoID, sessionHash)
