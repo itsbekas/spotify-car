@@ -34,6 +34,7 @@ func main() {
 	router.GET("/auth", authHandler.StartAuth)
 	router.GET("/callback", authHandler.HandleCallback)
 	router.GET("/token", authHandler.GetToken)
+	router.GET("/refresh", authHandler.RefreshToken)
 
 	router.Run(":8080")
 }

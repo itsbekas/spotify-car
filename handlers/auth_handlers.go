@@ -83,3 +83,19 @@ func (h *AuthHandler) GetToken(c *gin.Context) {
 		"refresh_token": refreshToken,
 	})
 }
+
+func (h *AuthHandler) RefreshToken(c *gin.Context) {
+	oldRefreshToken := c.Query("refresh_token")
+
+	accessToken, refreshToken, err := h.Spotify.RefreshAccessToken(oldRefreshToken)
+
+	if err != nil {
+		c.String(http.StatusInternalServerError, fmt.Sprintf("Error refreshing token: %v", err))
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"access_token":  accessToken,
+		"refresh_token": refreshToken,
+	})
+}
