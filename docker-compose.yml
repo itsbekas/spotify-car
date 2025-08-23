@@ -1,5 +1,6 @@
 services:
   spotify-car:
+    container_name: spotify-car
     build: .
     environment:
       - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
